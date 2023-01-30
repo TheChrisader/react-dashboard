@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Sidebar as ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
@@ -16,14 +16,15 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
+const Item = ({ title, to, icon, page }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const urlText = to.split("/")[1];
   return (
     <Link to={to}>
       <MenuItem
         rootStyles={{
-          color: selected === title ? "#6870fa" : colors.grey[100],
+          color: page === urlText ? "#6870fa" : colors.grey[100],
           ":hover": {
             color: "#868dfb",
 
@@ -50,7 +51,6 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
             },
           },
         }}
-        onClick={() => setSelected(title)}
         icon={icon}
       >
         <Typography>{title}</Typography>
@@ -62,17 +62,19 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const page = useLocation().pathname.split("/")[1];
+
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
   return (
     <Box sx={{ height: "100%" }}>
       <ProSidebar
         defaultCollapsed={isCollapsed}
         backgroundColor={colors.primary[400]}
         height="100vh"
-        style={{ maxHeight: "100vh", overflowY: "scroll" }}
+        style={{ maxHeight: "100vh", overflowY: "auto" }}
       >
-        <Menu>
+        <Menu rootStyles={{ ul: { height: "100vh" } }}>
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MapOutlinedIcon /> : undefined}
@@ -146,8 +148,7 @@ const Sidebar = () => {
               title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              page={page}
             />
 
             <Typography
@@ -161,22 +162,19 @@ const Sidebar = () => {
               title="Manage Team"
               to="/team"
               icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              page={page}
             />
             <Item
               title="Contacts Information"
               to="/contacts"
               icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              page={page}
             />
             <Item
               title="Invoices Balances"
               to="/invoices"
               icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              page={page}
             />
 
             <Typography
@@ -190,22 +188,19 @@ const Sidebar = () => {
               title="Profile Form"
               to="/form"
               icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              page={page}
             />
             <Item
               title="Calendar"
               to="/calendar"
               icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              page={page}
             />
             <Item
               title="FAQ Page"
               to="/faq"
               icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              page={page}
             />
 
             <Typography
@@ -219,29 +214,25 @@ const Sidebar = () => {
               title="Bar Chart"
               to="/bar"
               icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              page={page}
             />
             <Item
               title="Pie Chart"
               to="/pie"
               icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              page={page}
             />
             <Item
               title="Line Chart"
               to="/line"
               icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              page={page}
             />
             <Item
               title="Geography Chart"
               to="/geography"
               icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              page={page}
             />
           </Box>
         </Menu>
