@@ -19,7 +19,6 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  console.log(title, selected);
   return (
     <Link to={to}>
       <MenuItem
@@ -27,6 +26,12 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
           color: selected === title ? "#6870fa" : colors.grey[100],
           ":hover": {
             color: "#868dfb",
+
+            a: {
+              svg: {
+                animation: "shake 1s ease-in-out",
+              },
+            },
           },
           ":active": { color: "#6870fa" },
           a: {
@@ -37,6 +42,11 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
             },
             ":active": {
               backgroundColor: "transparent",
+            },
+
+            svg: {
+              display: "inline-block",
+              transition: "transform 0.2s ease-in-out",
             },
           },
         }}
