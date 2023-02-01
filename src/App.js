@@ -9,6 +9,7 @@ import { ColorModeContext, useMode } from "./theme";
 import Team from "./scenes/Team";
 import Form from "./scenes/Form";
 import Calendar from "./scenes/Calendar";
+import FAQ from "./scenes/Faq";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -28,6 +29,7 @@ function App() {
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/form" element={<Form />} />
               <Route path="/calendar" element={<Calendar />} />
+              <Route path="/faq" element={<FAQ />} />
             </Routes>
           </main>
         </div>
