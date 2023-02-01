@@ -10,6 +10,7 @@ import Team from "./scenes/Team";
 import Form from "./scenes/Form";
 import Calendar from "./scenes/Calendar";
 import FAQ from "./scenes/Faq";
+import Bar from "./scenes/Bar";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -30,6 +31,7 @@ function App() {
               <Route path="/form" element={<Form />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/bar" element={<Bar />} />
             </Routes>
           </main>
         </div>
